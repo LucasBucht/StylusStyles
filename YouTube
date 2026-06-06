@@ -1,0 +1,457 @@
+/* ==UserStyle==
+@name                   YouTube Decluttered
+@namespace              YouTube.com
+@version                1.0.0
+@description            A clean, decluttered version of YouTube
+@author                 Lucas Bucht
+@license                MIT
+==/UserStyle== */
+
+@-moz-document domain("youtube.com") {
+    
+    
+       
+/* =====================================================
+                   Color Palette & Fonts                                        
+   ===================================================== */
+
+:root {
+    --white: #ffff;
+    --grey: #717171;
+    --grey-dark: #5a5a5a;
+    --grey-light: #8d8d8d;
+    --blue-night: #4789E5;
+    --red-night: #ee353e;
+    --green: #20944B;
+    --night-darkest: #7d7d7d;
+    --night-darker: #717171;
+    --night-dark: #569bea;
+    --night-light: #EAEAEA;
+    --night-lighter: #bfbeb8;
+    --night-lightest: #ddd;
+    --night-menu: #000000e0;
+}
+
+@font-face {
+    font-family: Google Sans;
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/googlesans/v14/4UaGrENHsxJlGDuGo1OIlL3Owp4.woff2);
+}
+@font-face {
+    font-family: Google Sans;
+    font-style: normal;
+    font-weight: 500;
+    src: url(https://fonts.gstatic.com/s/googlesans/v14/4UabrENHsxJlGDuGo1OIlLU94YtzCwY.woff2);
+}
+
+body, html, #search-input.ytd-searchbox-spt input {
+    font-family: 'Google Sans', Roboto, sans-serif;
+    font-weight: 400;
+}
+b {
+    font-family: 'Google Sans', Roboto, sans-serif !important;
+    font-weight: 500 !important;
+}
+
+html[dark]:not([style-scope]):not(.style-scope),
+[dark]:not([style-scope]):not(.style-scope) {
+    --yt-spec-brand-background-primary: var(--night-darker) !important;
+    --yt-main-app-background: var(--night-darkest);
+    --yt-app-background: var(--night-darkest);
+    --yt-main-app-background-tmp: var(--night-darkest);
+    --yt-spec-general-background-b: var(--night-darker);
+    --yt-spec-general-background-a: var(--night-darker);
+    --yt-sidebar-background: var(--night-darkest);
+    --yt-guide-background: var(--night-darkest);
+    --yt-dialog-background: var(--night-darkest);
+    --yt-live-chat-background-color: var(--night-darker);
+    --paper-listbox-background-color: var(--night-darkest);
+    --yt-spec-brand-background-solid: var(--night-darker);
+    --darker-bg-color: var(--night-menu);
+    --yt-live-chat-vem-background-color: var(--night-darker);
+    --yt-std-surface-300: var(--night-darker);
+    --yt-simple-menu-header-background: var(--night-darker);
+    --yt-featured-channel-title-text-color: var(--night-lighter);
+    --ytd-metadata-line-color: var(--night-lighter);
+    --yt-spec-text-disabled: var(--night-lighter);
+    --yt-spec-text-primary: var(--night-lightest);
+    --video-title-text-color: var(--white);
+    --yt-expand-color: var(--night-lighter);
+    --link-text-color: var(--night-lighter);
+    --yt-spec-text-secondary: var(--night-lighter);
+    --ytd-badge-icon-color: var(--night-lighter);
+    --ytd-owner-badge-color: var(--night-lighter);
+    --yt-spec-call-to-action: var(--night-lighter);
+    --badge-bg: var(--red-night);
+    --badge-color: var(--night-lightest);
+    --comment-op-bg-color: var(--night-dark);
+    --iron-icon-fill-color: var(--night-lighter);
+    --comment-op-check-color: var(--white);
+    --yt-button-color: var(--night-lighter);
+    --yt-spec-brand-button-background: var(--red-night);
+    --searchbox-focus-color: var(--red-night);
+    --searchresults-bg-color: var(--night-darker);
+    --searchresults-text-color: var(--night-lighter);
+    --searchresults-text-bg-hovered: var(--night-dark);
+    --searchbox-placeholder-color: var(--night-lighter);
+    --searchresults-searched-text-color: var(--blue-night);
+    --paper-toggle-button-checked-button-color: var(--blue-night);
+    --scrollbar-background: var(--night-darker);
+    --scrollbar-color: var(--grey);
+    --scrollbar-hover: var(--grey-dark);
+    --scrollbar-active: var(--grey-light);
+    --sidepanel-menu-active: var(--red-night);
+    --sidepanel-menu-active-color: var(--night-lightest);
+    --yt-spec-10-percent-layer: var(--night-darkest);
+    --yt-spec-icon-disabled: var(--night-lightest);
+    --yt-spec-icon-inactive: var(--night-lighter);
+    --skeleton-bg-color: var(--night-darker);
+    --paper-toggle-button-unchecked-bar: var(--night-dark);
+    --paper-toggle-button-unchecked-bar-color: var(--paper-toggle-button-unchecked-bar);
+    --url-color: var(--blue-night);
+    --yt-button-border-radius: 4px !important;
+    --yt-spec-badge-chip-background: var(--night-darker);
+    --yt-menu-hover-backgound-color: var(--yt-spec-badge-chip-background);
+    --like-dislike-color: var(--blue-night);
+    --dislike-color: var(--red-night);
+    --like-color: var(--green);
+}
+
+    
+    
+/* =====================================================
+                    Home Screen Clutter                                        
+   ===================================================== */
+
+/* --- Remove YouTube Shorts --- */
+ytd-rich-shelf-renderer[is-shorts] { display: none !important; }
+ytd-reel-shelf-renderer,
+grid-shelf-view-model:has(ytm-shorts-lockup-view-model-v2) { display: none !important; }
+ytd-video-renderer:has(a#video-title[href^="/shorts/"]) { display: none !important; }
+#description ytd-reel-shelf-renderer.ytd-structured-description-content-renderer:has(#dismissible) { display: none !important; }
+    
+/* --- Remove Watch & Play shelf --- */
+ytd-horizontal-card-list-renderer[card-list-style="HORIZONTAL_CARD_LIST_STYLE_TYPE_CHANNEL_SHELF"] {
+    display: none !important;
+}
+
+/* --- Remove member-only videos --- */
+ytd-rich-grid-renderer #contents ytd-rich-item-renderer:has(.badge-style-type-members-only) { display: none !important; }
+ytd-rich-grid-renderer #contents ytd-rich-item-renderer { margin-inline: 0; }
+ytd-rich-grid-renderer #contents { column-gap: var(--ytd-rich-grid-item-margin); }
+ytd-rich-item-renderer:has(.yt-content-metadata-view-model__badge .yt-badge-shape--commerce) { display: none !important; }
+    
+/* --- Remove "New to you" --- */
+.ytd-feed-nudge-renderer,
+yt-chip-cloud-chip-renderer[chip-style="STYLE_REFRESH_TO_NOVEL_CHIP"] { display: none !important; }
+    
+/* --- Remove video surveys --- */
+#dismissible .ytd-inline-survey-renderer,
+ytd-popup-container ytd-checkbox-survey-renderer { display: none !important; }
+
+/* --- Remove other junk sections (Playables, Primetime, Premium Music) --- */
+.ytd-rich-shelf-renderer:has(a[href="/playables"]),
+.ytd-rich-shelf-renderer:has(a[href="/feed/storefront"]),
+.ytd-rich-section-renderer:has(a.yt-spec-button-shape-next[href^="/premium/music?ybp="]) { display: none !important; }
+    
+/* --- Remove feed filters --- */
+ytd-feed-filter-chip-bar-renderer { 
+    visibility: hidden !important;
+    height: 0px !important;
+    overflow: hidden !important;
+}
+
+/* --- "WATCHED" overlay on fully-watched thumbnails --- */
+yt-img-shadow.ytd-thumbnail[loaded] + #overlays.ytd-thumbnail {
+    position: relative; width: 100%; height: 100%;
+    display: flex; align-items: flex-end;
+}
+ytd-thumbnail-overlay-resume-playback-renderer { position: static; width: 100%; }
+#progress.ytd-thumbnail-overlay-resume-playback-renderer[style="width: 100%;"]::before {
+    content: 'WATCHED';
+    position: absolute; left: 0; top: 0; right: 0; bottom: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5em; font-weight: 500; letter-spacing: 0.050em;
+    background-color: rgba(0, 0, 0, 0.7); color: #fff;
+    z-index: -1; transition: opacity 250ms ease;
+}
+#overlays:hover #progress.ytd-thumbnail-overlay-resume-playback-renderer[style="width: 100%;"]::before { opacity: 0; }
+ytd-thumbnail-overlay-playback-status-renderer { display: none; }
+    
+    
+    
+/* =====================================================
+                     Masthead Clutter                                        
+   ===================================================== */    
+
+/* --- Thinner masthead --- */
+#masthead-container { height:    48px !important; }
+ytd-masthead #container { height: 55px !important; }      
+    
+/* --- Replace doodle with standard logo --- */
+ytd-yoodle-renderer picture { display: none !important; }
+ytd-yoodle-renderer ytd-logo { display: block !important; }
+ytd-yoodle-renderer ytd-logo[hidden] { display: block !important; }    
+    
+/* --- White YouTube logo --- */
+#logo svg g:first-child:not(g g) { filter: grayscale(100%) brightness(10); }
+[dark] #logo svg g:first-child:not(g g) { filter: grayscale(100%) invert(100%) brightness(10); }
+    
+/* ---  Remove country code on YouTube logo --- */
+#logo #country-code,
+ytd-topbar-logo-renderer #country-code { display: none; }
+    
+/* --- Remove voice search --- */
+#voice-search-button.ytd-masthead { display: none !important; }
+    
+/* --- Remove Create button --- */
+ytd-masthead button[aria-label="Create"] { display: none !important; }
+    
+/* --- Updated search keyboard icon --- */
+#container.ytd-searchbox { border-right: 1px solid transparent; }
+#gs_ok50 {
+    width: 24px; height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg fill='%23000' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg class='style-scope yt-icon'%3E%3Cpath d='M16,16H8v-2h8V16z M16,11h-2v2h2V11z M19,11h-2v2h2V11z M13,11h-2v2h2V11z M10,11H8v2h2V11z M7,11H5v2h2V11z M16,8h-2v2h2V8 z M19,8h-2v2h2V8z M13,8h-2v2h2V8z M10,8H8v2h2V8z M7,8H5v2h2V8z M22,5v14H2V5H22z M21,6H3v12h18V6z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position-y: -1px;
+}
+#gs_ok50 img { display: none; }    
+    
+/* --- Thinner frosted glass / chip bar backdrop --- */
+#frosted-glass {
+    height: 55px !important;
+}    
+    
+/* --- Reduce top gap on subscriptions --- */
+ytd-browse[page-subtype="subscriptions"] .grid-subheader.ytd-shelf-renderer { margin-top: 0 !important; }
+
+/* --- Remove unrelated videos on search --- */
+.ytd-search ytd-shelf-renderer { display: none !important; }
+    
+/* --- Profile pictures roundness: 100% (full circle) --- */
+#avatar-image,
+.avatar,
+.ytp-title-channel-logo,
+.image-thumbnail, .subscriber-avatar, #author-thumbnail-container.ytcd-comments-snapshot-item,
+yt-img-shadow:not(.ytd-backstage-image-renderer) { border-radius: 50% !important; }
+#endpoint-link yt-img-shadow,
+#playlist-thumbnail yt-img-shadow { border-radius: 0 !important; }
+
+/* --- Remove annoying YTP tips --- */
+.ytp-fullerscreen-edu-button,
+.ytp-tooltip-edu { display: none !important; }    
+
+    
+    
+/* =====================================================
+                     Video Clutter                                                 
+   ===================================================== */     
+    
+/* --- Remove channel memberships --- */
+ytd-item-section-renderer ytd-recognition-shelf-renderer,
+ytd-popup-container yt-mealbar-promo-renderer { display: none; }
+    
+/* --- Remove logo in corner --- */
+.iv-branding { display: none !important; }
+    
+/* --- Remove Next video button --- */
+#ytd-player .ytp-next-button { display: none !important; }
+    
+/* --- Remove Clip button --- */
+yt-button-view-model:has(path[d*="1-1 1 .45 1 1zm-1 9c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm3.79-7.77L21"]) { display: none !important; }
+
+/* --- Remove fundraising --- */
+#donation-shelf,
+ytd-badge-supported-renderer.ytd-watch-metadata { display: none !important; }
+    
+/* --- Remove Clip button and zero out its space --- */
+yt-button-view-model:has(button[aria-label="Clip"]) {
+    display: none !important;
+    width: 0 !important; min-width: 0 !important; max-width: 0 !important;
+    padding: 0 !important; margin: 0 !important; flex: 0 0 0 !important;
+} 
+    
+/* --- Remove tags for Watch next --- */
+ytd-watch-next-secondary-results-renderer yt-related-chip-cloud-renderer { display: none !important; }
+ytd-watch-flexy[default-layout] ytd-watch-next-secondary-results-renderer ytd-compact-video-renderer:first-child { margin-top: 0 !important; }
+
+/* --- Remove channel links in description --- */
+ytd-video-description-infocards-section-renderer yt-button-view-model:has(a[href^="https://"]) { display: none !important; }
+    
+/* --- Remove comments paid background --- */
+#paid-comment-background { display: none !important; }
+    
+/* --- Remove padding around Share/Save action buttons --- */
+ytd-structured-description-video-lockup-renderer ytd-badge-supported-renderer { display: none !important; }
+
+/* --- Remove channel branding watermarks --- */
+.branding-img-container { display: none !important; }
+
+/* --- Remove like/subscribe buttons glowing aura --- */
+.smartimation__border,
+.smartimation__background,
+.animated-action__background { display: none !important; }
+
+/* --- Remove chat live reactions overlay --- */
+#reaction-control-panel-overlay { display: none !important; }
+
+/* --- Remove RYD bar --- */
+#ryd-bar-container { display: none !important; width: 0 !important; padding: 0 !important; margin: 0 !important; flex: 0 !important; }
+ryd-tooltip { display: none !important; width: 0 !important; padding: 0 !important; margin: 0 !important; flex: 0 !important; }
+
+/* --- Creator heart outline matches background (dark mode) --- */
+[dark] #hearted-border.ytd-creator-heart-renderer {
+    color: var(--night-menu);
+    }
+
+/* --- Blue hashtags/links in description --- */
+#expander a.yt-simple-endpoint.yt-formatted-string,
+#description a.yt-simple-endpoint.yt-formatted-string { color: var(--url-color) !important; }
+
+/* --- Remove merch shelf --- */
+ytd-merch-shelf-renderer { display: none !important; }
+
+/* --- Remove sponsor button --- */
+#sponsor-button { display: none !important; }
+
+/* --- Remove download button --- */
+#flexible-item-buttons ytd-download-button-renderer { width: 0 !important; padding: 0 !important; margin: 0 !important; flex: 0 !important; }
+    
+/* --- Less crazy button animations --- */
+ytd-segmented-like-dislike-button-renderer .smartimation__border-gradient,
+segmented-like-dislike-button-view-model .smartimation__border-gradient { display: none; }
+ytd-segmented-like-dislike-button-renderer .smartimation--active-border .smartimation__background,
+segmented-like-dislike-button-view-model .smartimation--active-border .smartimation__background { opacity: 0; }
+ytd-segmented-like-dislike-button-renderer ytd-lottie-player,
+segmented-like-dislike-button-view-model ytd-lottie-player { filter: saturate(0); }
+#subscribe-button .animated-action__background-container,
+#subscribe-button .animated-action__lottie,
+#subscribe-button .smartimation__border { display: none; }
+ytd-subscribe-button-renderer[animated-action-enabled][subscribed] { transition: width .1s ease; }
+.ytp-play-progress { background: rgb(255, 0, 51) !important; }
+    
+/* --- Hide Thanks button --- */
+yt-button-view-model:has(button[aria-label="Thanks"]),
+button-view-model:has(button[aria-label="Thanks"]),
+ytd-menu-service-item-renderer:has(button[aria-label="Thanks"]) { display: none !important; }
+
+/* --- Hide Ask button --- */
+yt-button-view-model:has(button[aria-label="Ask"]),
+button-view-model:has(button[aria-label="Ask"]),
+ytd-menu-service-item-renderer:has(button[aria-label="Ask"]) { display: none !important; }
+
+/* --- Hide verified badges --- */
+.badge-shape-style-type-verified-artist,
+.badge-shape-style-type-verified { display: none !important; }    
+
+/* --- Hide useless description sections --- */
+ytd-video-description-infocards-section-renderer #header,
+ytd-video-description-infocards-section-renderer #social-links,
+ytd-video-description-infocards-section-renderer #action-buttons,
+ytd-video-description-course-section-renderer { display: none !important; }
+ytd-video-description-infocards-section-renderer,
+#collapse { padding-bottom: 0; margin: 0; }
+    
+/* --- Minimize action buttons width, hide labels (compact) --- */
+#menu ytd-button-renderer .yt-spec-button-shape-next__button-text-content,
+#menu yt-button-view-model .yt-spec-button-shape-next__button-text-content { display: none; }
+#menu ytd-button-renderer .yt-spec-button-shape-next__icon,
+#menu yt-button-view-model .yt-spec-button-shape-next__icon { margin: -20px; }
+#menu ytd-button-renderer,
+#menu yt-button-view-model { margin-left: 8px; }
+#menu ytd-button-renderer .yt-spec-button-shape-next,
+#menu yt-button-view-model .yt-spec-button-shape-next {
+    padding: 0 10px !important;
+    min-width: 0 !important;
+    width: auto !important;
+}
+#segmented-like-button .yt-spec-button-shape-next.yt-spec-button-shape-next--disabled { padding: 0 16px !important; }
+#segmented-like-button .yt-spec-button-shape-next--disabled .yt-core-attributed-string { display: block; }
+#segmented-like-button .yt-spec-button-shape-next--disabled .yt-spec-button-shape-next__icon { margin: 0 6px 0 -6px; }
+#menu ytd-button-renderer .yt-spec-button-shape-next,
+#menu yt-button-view-model .yt-spec-button-shape-next { padding: 0 18px !important; }
+
+/* --- Compact author block, replace button labels with icons --- */
+ytd-watch-metadata[actions-on-separate-line] #top-row.ytd-watch-metadata,
+#top-row { display: flex !important; justify-content: space-between !important; }
+#top-row > #owner { min-width: 0px !important; flex: 1 1 100% !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#top-row > #actions { min-width: fit-content !important; flex: 10 1 max-content !important; }
+ytd-video-owner-renderer #avatar { margin-right: 8px !important; }
+ytd-video-owner-renderer #upload-info { margin-right: 10px !important; }
+.ryd-tooltip-bar-container { left: -0.1vw !important; top: -3px !important; }
+#owner .yt-spec-button-shape-next,
+#overlay #channel-container .yt-spec-button-shape-next { padding: 0 6px; }
+#owner .yt-core-attributed-string,
+#overlay #channel-container .yt-core-attributed-string { display: none; }
+#owner #subscribe-button .yt-spec-button-shape-next,
+#overlay #channel-container #subscribe-button .yt-spec-button-shape-next { padding: 0 16px; }
+#owner .yt-spec-button-shape-next:not(.yt-spec-button-shape-next--icon-leading-trailing) .yt-spec-button-shape-next__button-text-content,
+#overlay #channel-container .yt-spec-button-shape-next .yt-spec-button-shape-next__button-text-content { width: 24px !important; height: 24px !important; }
+html[dark] #owner .yt-spec-button-shape-next--filled .yt-spec-button-shape-next__button-text-content,
+#overlay #channel-container .yt-spec-button-shape-next--filled .yt-spec-button-shape-next__button-text-content,
+html:not([dark]) #owner .yt-spec-button-shape-next--tonal .yt-spec-button-shape-next__button-text-content,
+html[dark] #overlay #channel-container .yt-spec-button-shape-next--filled .yt-spec-button-shape-next__button-text-content { filter: invert(1.0); }
+#owner #analytics-button .yt-spec-button-shape-next__button-text-content { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 17H7V10H9V17ZM13 7H11V17H13V7ZM17 14H15V17H17V14ZM20 4H4V20H20V4ZM21 3V21H3V3H21Z' fill='%23fff'/%3E%3C/svg%3E"); }
+#owner #sponsor-button .yt-spec-button-shape-next__button-text-content { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.67 10.91l2.01-1.74-2.65-.23L12 6.5l-1.03 2.44-2.65.23 2.01 1.74-.6 2.59L12 12.13l2.28 1.37-.61-2.59zM12 2c-4.42 0-8 3.58-8 8 0 2.53 1.17 4.77 3 6.24V22l5-2 5 2v-5.76c1.83-1.47 3-3.71 3-6.24 0-4.42-3.58-8-8-8zm4 18.52l-4-1.6-4 1.6v-3.6c1.18.68 2.54 1.08 4 1.08s2.82-.4 4-1.08v3.6zM12 17c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z' fill='%23fff'/%3E%3C/svg%3E"); }
+#owner #purchase-button .yt-spec-button-shape-next__button-text-content { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 7V10C8 10.55 8.45 11 9 11H15C16.1 11 17 11.9 17 13V17C17 18.1 16.1 19 15 19H13V21H11V19H7V18H15C15.55 18 16 17.55 16 17V13C16 12.45 15.55 12 15 12H9C7.9 12 7 11.1 7 10V7C7 5.9 7.9 5 9 5H11V3H13V5H17V6H9C8.45 6 8 6.45 8 7Z' fill='%23fff'/%3E%3C/svg%3E"); }
+#owner #subscribe-button .yt-spec-button-shape-next--filled .yt-spec-button-shape-next__button-text-content,
+#overlay #channel-container #subscribe-button .yt-spec-button-shape-next--filled .yt-spec-button-shape-next__button-text-content { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M 20 13 h -7 v 8 h -2 v -8 H 3 v -2 h 8 V 3 h 2 v 8 h 8 V 13 z' fill='%23fff'/%3E%3C/svg%3E"); }
+#overlay #channel-container #subscribe-button .yt-spec-button-shape-next--tonal .yt-spec-button-shape-next__button-text-content { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0.5 0 24 24'%3E%3Cpath d='M9,18.7%0Al-5.4-5.4%0Al1.2-1.2%0AL9,16.4%0AL20.2,5.6%0Al1.2,1.2%0AL9,18.7%0Az' fill='%23fff'/%3E%3C/svg%3E"); }
+#owner #subscribe-button .yt-spec-button-shape-next--call-to-action .yt-spec-button-shape-next__button-text-content { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M 14 8 L 16 10 L 6 20 H 4 V 18 L 14 8 Z M 14.06 6.19 L 3 17.25 V 21 H 6.75 L 17.81 9.94 L 14.06 6.19 Z M 17.61 4.05 L 19.98 6.42 L 18.84 7.56 L 16.47 5.19 L 17.61 4.05 Z M 17.61 2.63 L 15.06 5.18 L 18.85 8.97 L 21.4 6.42 L 17.61 2.63 Z' fill='%23fff'/%3E%3C/svg%3E"); }
+    
+    
+    
+/* =====================================================
+                      Sidebar Clutter                                                 
+   ===================================================== */         
+    
+/* --- Remove newness dots --- */
+#newness-dot { display: none !important; }
+
+/* --- Remove bloat --- */
+.tp-yt-app-drawer a#endpoint[title="Shorts"],
+.tp-yt-app-drawer a[href^="/feed/clips"][title],
+.tp-yt-app-drawer a[href^="/feed/trending"][title],
+.tp-yt-app-drawer a[href^="/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ"][title],
+.tp-yt-app-drawer a[href^="/feed/storefront"][title],
+.tp-yt-app-drawer a[href^="/channel/UC4R8DWoMoI7CAwX8_LjQHig"][title],
+.tp-yt-app-drawer a[href^="/gaming"][title],
+.tp-yt-app-drawer a[href^="/channel/UCEgdi0XIXXZ-qJOFPf4JSKw"][title],
+.tp-yt-app-drawer a[href^="https://studio.youtube.com"][title="Creator Studio"],
+.tp-yt-app-drawer a[href^="https://studio.youtube.com"][title="YouTube Studio"],
+.tp-yt-app-drawer a[href^="https://music.youtube.com"][title="YouTube Music"],
+.tp-yt-app-drawer a[href^="https://www.youtubekids.com"][title="YouTube Kids"],
+.tp-yt-app-drawer a[href^="https://tv.youtube.com"][title="YouTube TV"],
+.tp-yt-app-drawer a#endpoint[title="Send feedback"],
+.tp-yt-app-drawer #guide-links-secondary.ytd-guide-renderer > a[href="/new"],
+.tp-yt-app-drawer #footer.ytd-guide-renderer #copyright { display: none !important; }
+.tp-yt-app-drawer #sections ytd-guide-section-renderer:nth-last-child(2),
+.tp-yt-app-drawer #sections ytd-guide-section-renderer:nth-last-child(3) { display: none; }
+    
+/* --- Remove sidebar footer links (About, Press, Copyright, Report history etc.) --- */
+#footer.ytd-guide-renderer { display: none !important; }
+    
+/* --- Compact sidebar lists --- */
+.ytd-guide-section-renderer { --paper-item-min-height: 32px !important; }
+tp-yt-paper-item.ytd-guide-entry-renderer { padding: 0 12px; }
+yt-img-shadow.ytd-guide-entry-renderer, .guide-icon.ytd-guide-entry-renderer { margin-right: 12px; }
+
+/* --- Hide sidebar section titles --- */
+ytd-guide-section-renderer h3,
+ytd-guide-section-renderer ytd-guide-collapsible-section-entry-renderer #header,
+ytd-guide-section-renderer .ytd-guide-entry-renderer[href="/playables/saved"] { display: none !important; }
+    
+/* --- Active sidebar item: red highlight --- */
+ytd-guide-entry-renderer[active] { background-color: var(--sidepanel-menu-active); border-radius: 0 25px 25px 0; }
+ytd-guide-entry-renderer[active] .guide-icon.ytd-guide-entry-renderer,
+ytd-guide-entry-renderer[active] .title.ytd-guide-entry-renderer { fill: var(--sidepanel-menu-active-color); color: var(--sidepanel-menu-active-color); }
+    
+/* --- Better modal dialog box-shadow --- */
+html, html[dark] {
+    --paper-dialog-shadow-color: #0004 !important;
+    --yt-spec-static-overlay-background-light: #0005 !important;
+}
+    
+    
+ 
+} /* end @-moz-document */
