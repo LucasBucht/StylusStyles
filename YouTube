@@ -241,6 +241,8 @@ yt-img-shadow:not(.ytd-backstage-image-renderer) { border-radius: 50% !important
 .ytp-fullerscreen-edu-button,
 .ytp-tooltip-edu { display: none !important; }    
 
+/* --- Remove "Ask YouTube" button --- */
+button-view-model:has(button[aria-label="Ask YouTube"]) { display: none !important; }
     
     
 /* =====================================================
