@@ -256,9 +256,6 @@ ytd-popup-container yt-mealbar-promo-renderer { display: none; }
 /* --- Remove logo in corner --- */
 .iv-branding { display: none !important; }
     
-/* --- Remove Next video button --- */
-#ytd-player .ytp-next-button { display: none !important; }
-    
 /* --- Remove Clip button --- */
 yt-button-view-model:has(path[d*="1-1 1 .45 1 1zm-1 9c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm3.79-7.77L21"]) { display: none !important; }
 
