@@ -1,0 +1,45 @@
+/* ==UserStyle==
+@name           canvas.pitt.edu - BetterCampus Declutter
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    Hides AI integration, paywalls, and premium popups on Pitt's BetterCampus/Canvas
+@author         Lucas
+==/UserStyle== */
+@-moz-document url-prefix("https://canvas.pitt.edu/") {
+
+    /* ============================================
+       AI INTEGRATION
+       ============================================ */
+    /* Insert selectors here once identified */
+
+
+    /* ============================================
+       PAYWALLS / UPGRADE NAGS
+       ============================================ */
+    /* Insert selectors here once identified */
+
+
+    /* ============================================
+       NAVIGATION / DASHBOARD CLUTTER
+       ============================================ */
+
+    /* "Switch to new dashboard" nag button. Old dashboard is fine as-is. */
+    button[data-testid="switch-to-new-dashboard-button"] {
+        display: none !important;
+    }
+
+
+    /* ============================================
+       PREMIUM FEATURE POPUPS / MODALS
+       ============================================ */
+
+    /* Catch-all: hides ANY button flagged with the premium crown icon.
+       BetterCampus marks premium-gated buttons with a lucide-crown SVG
+       using the .text-premium/.fill-premium classes as a semantic tag.
+       This generalizes beyond just "Sync" to other premium buttons too. */
+    button.bc-btn:has(.text-premium),
+    button.bc-btn:has(.fill-premium) {
+        display: none !important;
+    }
+
+}
